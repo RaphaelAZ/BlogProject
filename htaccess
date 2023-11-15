@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase C:\wamp64\www\Stack\BlogProject
+RewriteRule ^index\\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . C:\wamp64\www\Stack\BlogProject/index.php [L]
