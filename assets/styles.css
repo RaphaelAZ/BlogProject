@@ -1,0 +1,12 @@
+.message-display {
+    white-space : nowrap;
+    overflow : hidden;
+    -o-text-overflow : ellipsis;    /* Opera < 10 */
+    text-overflow :    ellipsis;
+    max-width: 100px;
+}
+
+.go-to {
+    width: 2rem;
+    height: 2rem;
+}
