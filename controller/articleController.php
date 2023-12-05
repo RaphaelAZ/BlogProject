@@ -10,8 +10,12 @@ if(isset($_GET['id'])){
     $comments = $bddConnection->execute("SELECT * FROM comments WHERE idArticles=".$_GET['id']." ORDER BY postDate DESC");
     $commentaries = $comments->fetchAll();
 
-    var_dump($commentaries);
-
+    $users = $bddConnection->execute("SELECT name,email,admin FROM users");
+    $usersList = $users->fetchAll();
+    $listOfUsers = array();
+    foreach($usersList as $user){
+        var_dump($user);
+    }
 } else {
     $error = "Aucun article à afficher";
 }

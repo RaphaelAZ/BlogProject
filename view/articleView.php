@@ -34,12 +34,17 @@
       </div>
       <?php 
       
-      
-      
-      ?>
-      <!-- <div class="card-body">
-        Blabla
-      </div> -->
+      foreach($commentaries as $comment){ ?>
+      <div class="card-body">
+        <h6>
+          
+        </h6>
+        <?php
+        echo $comment['message'];
+        echo $comment['postDate'];
+        ?>
+      </div>
+      <?php } ?>
     </div>
   </div>
 </body>
