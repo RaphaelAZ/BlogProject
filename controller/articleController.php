@@ -1,24 +1,29 @@
 <?php
 
 include './model/articleModel.php';
+include './model/commentModel.php';
+include './model/articlesManagerModel.php';
+include './model/commentsManagerModel.php';
 include './model/bddModel.php';
-$bddConnection = new BDDConnection();
-if(isset($_GET['id'])){
-    $article = $bddConnection->execute("SELECT * FROM articles WHERE id=".$_GET['id']);
-    $theArticle = $article->fetchAll();
 
-    $comments = $bddConnection->execute("SELECT * FROM comments WHERE idArticles=".$_GET['id']." ORDER BY postDate DESC");
-    $commentaries = $comments->fetchAll();
+$error = "";
 
-    $users = $bddConnection->execute("SELECT name,email,admin FROM users");
-    $usersList = $users->fetchAll();
-    $listOfUsers = array();
-    foreach($usersList as $user){
-        var_dump($user);
-    }
-} else {
-    $error = "Aucun article à afficher";
+try{
+    $database = new BDDConnection();
+    $Amanager = new ArticlesManager($database);
+    $Cmanager = new CommentsManager($database);
+    $article = $Amanager->getArticleById($_GET['id']);
+    $comments = $Cmanager->getCommentsOfArticle($_GET['id']);
+} catch(PDOException $e) {
+    $error = $e;
 }
+
+if(isset($_POST['comment_delete'])){
+    
+}
+
+include './view/headerView.php';
 include './view/articleView.php';
+include './view/footerView.php';
 
 ?>

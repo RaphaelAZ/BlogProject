@@ -1,11 +1,21 @@
 <?php
 
-include './model/articlesModel.php';
+include './model/articleModel.php';
+include './model/articlesManagerModel.php';
 include './model/bddModel.php';
-$bddConnection = new BDDConnection();
-$articlesList = $bddConnection->execute("SELECT * FROM articles");
-$List = $articlesList->fetchAll();
-$articles = new Articles($List);
+
+$error = "";
+
+try{
+    $database = new BDDConnection();
+    $manager = new ArticlesManager($database);
+    $articlesList = $manager->getAllArticles();
+} catch(PDOException $e) {
+    $error = $e;
+}
+
+include './view/headerView.php';
 include './view/articlesView.php';
+include './view/footerView.php';
 
 ?>

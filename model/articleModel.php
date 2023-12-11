@@ -1,60 +1,32 @@
 <?php
-
 Class Article {
-    private string $name="";
-    private string $context="";
-    private string $content="";
+    private $id = 0;
+    private $name = "";
+    private $context = "";
+    private $content = "";
 
-    public function __construct(string $name, string $context, string $content)
+    public function __construct($id,$name,$context,$content)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->context = $context;
         $this->content = $content;
     }
 
-    public function getName(){
+    public function getArticleID(){
+        return $this->id;
+    }
+
+    public function getArticleName(){
         return $this->name;
     }
 
-    public function getContext(){
+    public function getArticleContext(){
         return $this->context;
     }
 
-    public function getContent(){
+    public function getArticleContent(){
         return $this->content;
-    }
-
-    public function setName($name){
-        if($name==""){
-            trigger_error(
-                'Le nom est incorrect',
-                E_USER_ERROR
-            );
-        } else {
-            $this->name = $name;
-        }
-    }
-
-    public function setContext($context){
-        if($context==""){
-            trigger_error(
-                'Le contexte est incorrect',
-                E_USER_ERROR
-            );
-        } else {
-            $this->context = $context;
-        }
-    }
-
-    public function setContent($content){
-        if($content==""){
-            trigger_error(
-                'Le contenu est incorrect',
-                E_USER_ERROR
-            );
-        } else {
-            $this->content = $content;
-        }
     }
 } 
 

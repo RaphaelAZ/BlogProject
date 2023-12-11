@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Blog - Projet</title>
-  <link rel="stylesheet" href="../assets/styles.css">
-</head>
-
-<body>
+<main>
   <h1>Liste des articles</h1>
   <table class="table justify-content text-center">
         <tr class="font-weight-blod">
@@ -25,25 +15,30 @@
                 Voir
             </td>
         </tr>
-        <?php foreach($articles->getArticles() as $article){?>
+        <?php foreach($articlesList as $article){?>
         <tr>
             <td class="message-display">
-                <?php echo $article['name']; ?>
+                <?php echo $article->getArticleName(); ?>
             </td>
             <td class="message-display">
-                <?php echo $article['context']; ?>
+                <?php echo $article->getArticleContext(); ?>
             </td>
             <td class="message-display">
-                <?php echo $article['content']; ?>
+                <?php echo $article->getArticleContent(); ?>
             </td>
             <td>
-                <a href="<?php echo '/article?id='.$article['id']; ?>">
+                <a href="<?php echo '/article?id='.$article->getArticleID(); ?>">
                     <img src="../assets/img/eye_logo.png" class="img-fluid img-thumbnail rounded go-to">
                 </a>
             </td>
         </tr>
         <?php } ?>
     </table>
-</body>
-
-</html>
+    <div>
+        <?php
+        if($error){
+            echo $error;
+        }
+        ?>
+    </div>
+</main>

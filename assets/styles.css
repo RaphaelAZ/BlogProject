@@ -10,3 +10,26 @@
     width: 2rem;
     height: 2rem;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    padding: 5rem;
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+}
+
+#admin-delete {
+    position: relative;
+    top : 10px;
+    right: 10px;
+}
