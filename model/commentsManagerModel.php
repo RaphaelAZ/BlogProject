@@ -34,6 +34,17 @@ Class CommentsManager {
 
         return $name;
     }
+
+    public function deleteACommentById($id){
+        if(isset($_SESSION['admin'])&&$_SESSION['admin']==true){
+            $connection = $this->db->getConnection();
+
+            $stmt = $connection->prepare("DROP * FROM comments WHERE comments.idArticle = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $stmt->close();
+        }
+    }
 }
 
 ?>

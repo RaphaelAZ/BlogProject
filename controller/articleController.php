@@ -14,12 +14,11 @@ try{
     $Cmanager = new CommentsManager($database);
     $article = $Amanager->getArticleById($_GET['id']);
     $comments = $Cmanager->getCommentsOfArticle($_GET['id']);
+    $contenu_url = "http://localhost:8000/article?id=".$_GET['id'];
+
+    $facebook_share_url = "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($contenu_url);
 } catch(PDOException $e) {
     $error = $e;
-}
-
-if(isset($_POST['comment_delete'])){
-    
 }
 
 include './view/headerView.php';

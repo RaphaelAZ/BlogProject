@@ -7,12 +7,10 @@ if(isset($_GET['id'])){
 else {
   $id=0;
 }
+
 $request = $_SERVER['REQUEST_URI'];
 
 switch ($request) {
-    case "/article":
-        include "./controller/articleController.php";
-        break;
     case "/article?id=".$id :
         include "./controller/articleController.php";
         break;
