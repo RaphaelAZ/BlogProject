@@ -20,6 +20,7 @@ if(isset($_POST['username'])&&isset($_POST['password'])){
         $_SESSION['session_token'] = bin2hex(random_bytes(32));;
         $_SESSION['name'] = $Umanager->verifyUser($_POST['username'],$_POST['password'])->getName();
         $_SESSION['admin'] = $Umanager->verifyUser($_POST['username'],$_POST['password'])->isAdmin();
+        $_SESSION['id'] = $Umanager->verifyUser($_POST['username'],$_POST['password'])->getID();
     }
     else {
         $error = "Utilisateur Inexistant";

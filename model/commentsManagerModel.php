@@ -45,6 +45,21 @@ Class CommentsManager {
             $stmt->close();
         }
     }
+
+    public function insertNewComment($newComment){
+        $connection = $this->db->getConnection();
+        $idArticle = $newComment->getCommentArticle();
+        $idUser = $newComment->getCommentUser();
+        $postDate = $newComment->getPostDate();
+        $message = $newComment->getmessage();
+
+
+
+        $stmt = $connection->prepare("INSERT INTO comments (idArticle, idUser, postDate, message) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("iiii", $idArticle,$idUser,$postDate,$message);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 
 ?>

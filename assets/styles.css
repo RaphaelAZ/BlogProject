@@ -33,3 +33,14 @@ footer {
     top : 10px;
     right: 10px;
 }
+
+.share-container {
+    display: flex;
+    align-content:flex-start;
+    justify-content:flex-start;
+    && a {
+        margin-left: 20px;
+        margin-bottom: 10px;
+        font-size: 1.6em;
+    }
+}

@@ -1,5 +1,6 @@
 <main>
 <?php
+unset($_POST);
   if(isset($_GET['id'])){
   echo "<a href='/articles' class='text-decoration-none rounded bg-danger p-1 link-light'>Retour</a>";
   }
@@ -17,9 +18,26 @@
       <?php echo $article->getArticleContent(); ?>
       </div>
       <hr>
-      <?php
-      echo "<a href='$facebook_share_url' target='_blank'>Partager sur Facebook</a>";
-      ?>
+      <div class="share-container">
+        <a href='<?php $facebook_share_url ?>' target='_blank'><span class="iconify-inline" data-icon="bi:facebook" style="color: #3b5998"></span></a>
+        <a href='<?php $x_share_url ?>' target='_blank'><span class="iconify-inline" data-icon="ri:twitter-x-fill" style="color: black;"></span></a>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-3">
+    <div class="card">
+      <div class="card-header">
+        <h5>Poster un commentaire</h5>
+      </div>
+      <div class="card-body">
+        <div class="mb-2">
+          <form action='<?php echo("/article?id=".$_GET['id']); ?>' method='post'>
+          <?php if(isset($_SESSION['session_token'])) {echo"<textarea class='form-control mb-2' id='comment' name='comment' rows='3' placeholder='Entrez votre commentaire ici...'></textarea>
+          <button type='submit' class='btn btn-success'>Poster le commentaire</button>";}
+          else { echo"<span class='mt-1' style='color: red'>Vous devez être connecté pour publier des commentaires</span>";} ?>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
   <div class="container mt-3">
@@ -40,7 +58,7 @@
         </h6>
         <?php
         echo $comment->getMessage();
-        if(isset($_SESSION['name'])&&isset($_SESSION['session_token'])){
+        if(boolval(isset($_SESSION['admin']))){
           echo ("<div>
           <form method='post' action='/article?id=".$_GET['id']."'>
           <button type='submit' class='btn bg-danger text-light' id='admin-delete' value='' id='delete_comment' name='delete_comment'>
@@ -69,3 +87,4 @@
     ?>
   </div>
   </main>
+  <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/iconify/2.0.0/iconify.min.js"></script>

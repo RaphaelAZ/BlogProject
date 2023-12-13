@@ -23,6 +23,9 @@ switch ($request) {
     case "/deconnexion":
         include "./controller/deconnexionController.php";
         break;
+    case "/404":
+        include "./view/404view.php";
+        break;
     default: 
         include "./controller/homeController.php";
         break;
