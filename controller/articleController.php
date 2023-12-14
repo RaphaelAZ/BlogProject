@@ -15,7 +15,6 @@ try{
     $article = $Amanager->getArticleById($_GET['id']);
     $comments = $Cmanager->getCommentsOfArticle($_GET['id']);
 
-
     $contenu_url = "http://localhost:8000/article?id=1";
 
     $facebook_share_url = "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($contenu_url);
@@ -24,23 +23,31 @@ try{
     $error = $e;
 }
 
-if(isset($_POST['comment'])&&isset($_SESSION['session_token'])){
-    $postDate = date('Y-m-d h:i:s', time());
-    $NewComment = new Comment("",intval($_GET['id']),intval($_SESSION['id']),$postDate,$_POST['comment']);
-    $Cmanager->insertNewComment($NewComment);
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    unset($_POST);
+    $id = $_GET['id'];
     if(isset($_POST['comment'])&&isset($_SESSION['session_token'])){
-        $postDate = date('Y-m-d h:i:s', time());
+        $postDate = date('Y-m-d h:i:s');
         $NewComment = new Comment("",intval($_GET['id']),intval($_SESSION['id']),$postDate,$_POST['comment']);
         $Cmanager->insertNewComment($NewComment);
+        header("Location: /article?id=$id");
     }
 
-    $id = $_GET['id'];
+    if(isset($_POST['modify-post'])){
+        $Amanager->modifyPostByID($_POST['modify-post'],$_GET['id']);
+        header("Location: /article?id=$id");
+    }
 
-    header("Location: /article?id=$id");
+    if(isset($_POST['delete_comment'])){
+        $Cmanager->deleteACommentById($_POST['delete_comment']);
+        header("Location: /article?id=$id");
+    }
+
+    if(isset($_POST['delete-post'])){
+        $Cmanager->deleteAllCommentsByID($_GET['id']);
+        $Amanager->deleteThisPost($_GET['id']);
+        header("Location : localhost:8000/articles");
+    }
+    unset($_POST);
 }
 
 include './view/headerView.php';

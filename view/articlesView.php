@@ -34,6 +34,11 @@
         </tr>
         <?php } ?>
     </table>
+    <?php if(isset($_SESSION['session_token'])){ ?>
+    <div>
+        <a href='/creation' class="btn btn-primary">Créer un article</a>
+    </div>
+    <?php } ?>
     <div>
         <?php
         if($error){

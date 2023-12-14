@@ -39,7 +39,7 @@ Class CommentsManager {
         if(isset($_SESSION['admin'])&&$_SESSION['admin']==true){
             $connection = $this->db->getConnection();
 
-            $stmt = $connection->prepare("DROP * FROM comments WHERE comments.idArticle = ?");
+            $stmt = $connection->prepare("DELETE FROM comments WHERE id = ?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $stmt->close();
@@ -56,7 +56,16 @@ Class CommentsManager {
 
 
         $stmt = $connection->prepare("INSERT INTO comments (idArticle, idUser, postDate, message) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("iiii", $idArticle,$idUser,$postDate,$message);
+        $stmt->bind_param("iiss", $idArticle,$idUser,$postDate,$message);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function deleteAllCommentsByID($id){
+        $connection = $this->db->getConnection();
+
+        $stmt = $connection->prepare("DELETE FROM comments WHERE idArticle = ?");
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $stmt->close();
     }
