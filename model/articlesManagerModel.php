@@ -77,9 +77,9 @@ Class ArticlesManager {
     public function addNewArticle($name,$context,$content){
         $connection = $this->db->getConnection();
 
-        // $name = strip_tags($name);
-        // $context = strip_tags($context);
-        // $content = strip_tags($content);
+        $name = htmlspecialchars($name);
+        $context = htmlspecialchars($context);
+        $content = htmlspecialchars($content);
 
         $idUser = $_SESSION['id'];
         

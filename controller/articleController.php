@@ -24,28 +24,28 @@ try{
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_GET['id'];
     if(isset($_POST['comment'])&&isset($_SESSION['session_token'])){
         $postDate = date('Y-m-d h:i:s');
         $NewComment = new Comment("",intval($_GET['id']),intval($_SESSION['id']),$postDate,$_POST['comment']);
         $Cmanager->insertNewComment($NewComment);
-        header("Location: /article?id=$id");
     }
 
     if(isset($_POST['modify-post'])){
         $Amanager->modifyPostByID($_POST['modify-post'],$_GET['id']);
-        header("Location: /article?id=$id");
     }
 
     if(isset($_POST['delete_comment'])){
         $Cmanager->deleteACommentById($_POST['delete_comment']);
-        header("Location: /article?id=$id");
     }
+
+    $id = $_GET['id'];
+
+    header("Location: /article?id=$id");
 
     if(isset($_POST['delete-post'])){
         $Cmanager->deleteAllCommentsByID($_GET['id']);
         $Amanager->deleteThisPost($_GET['id']);
-        header("Location : localhost:8000/articles");
+        header("Location: /articles");
     }
     unset($_POST);
 }

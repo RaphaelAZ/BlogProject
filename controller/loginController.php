@@ -15,14 +15,15 @@ try{
 }
 
 if(isset($_POST['username'])&&isset($_POST['password'])){
-    if($Umanager->verifyUser($_POST['username'],$_POST['password'])){
+    $userVerification = $Umanager->verifyUser($_POST['username'], $_POST['password']);
+
+    if ($userVerification) {
         $validConnection = "La connexion a été établie";
-        $_SESSION['session_token'] = bin2hex(random_bytes(32));;
-        $_SESSION['name'] = $Umanager->verifyUser($_POST['username'],$_POST['password'])->getName();
-        $_SESSION['admin'] = $Umanager->verifyUser($_POST['username'],$_POST['password'])->isAdmin();
-        $_SESSION['id'] = $Umanager->verifyUser($_POST['username'],$_POST['password'])->getID();
-    }
-    else {
+        $_SESSION['session_token'] = bin2hex(random_bytes(32));
+        $_SESSION['name'] = $userVerification->getName();
+        $_SESSION['admin'] = $userVerification->isAdmin();
+        $_SESSION['id'] = $userVerification->getID();
+    } else {
         $error = "Utilisateur Inexistant";
     }
 }

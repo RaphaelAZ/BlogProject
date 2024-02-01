@@ -5,7 +5,7 @@ Class UserConnection {
     private $name = "";
     private $email = "";
     private $password = "";
-    private $isAdmin = true;
+    private $isAdmin = false;
 
     public function __construct($id,$name,$email,$password,$isAdmin) {
         $this->id = $id;

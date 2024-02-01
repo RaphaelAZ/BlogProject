@@ -18,6 +18,6 @@
 </main>
 <?php }
 else {
-    header("Location : /login");
+    header("Location: /login");
 }
 ?>
